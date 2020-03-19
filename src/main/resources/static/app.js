@@ -37,8 +37,12 @@ var app = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/newpoint', function (eventbody) {
-                alert(eventbody.body);
-                
+                var obj =JSON.parse(eventbody.body);
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.arc(obj.x, obj.y, 1, 0, 2 * Math.PI);
+                ctx.stroke();
             });
         });
 
