@@ -56,7 +56,7 @@ var app = (function () {
             var can = document.getElementById("canvas");
             
             //websocket connection
-            connectAndSubscribe();
+            
         },
 
         publishPoint: function(px,py){
@@ -74,6 +74,10 @@ var app = (function () {
             }
             setConnected(false);
             console.log("Disconnected");
+        },
+
+        connect: function(){
+            connectAndSubscribe();
         }
     };
 
