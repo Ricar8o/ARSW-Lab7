@@ -44,8 +44,23 @@ var app = (function () {
                 ctx.arc(obj.x, obj.y, 1, 0, 2 * Math.PI);
                 ctx.stroke();
             });
+            stompClient.subscribe('/topic/newpolygon.'+ num, function (eventbody) {
+                var obj =JSON.parse(eventbody.body);
+                dibujar(obj);
+            });
         });
+        
+    };
 
+    var dibujar = function(points){
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(points[0].x,points[0].y);
+        for(var i = 0; i < points.length; i++) {
+            ctx.lineTo(points[i].x,points[i].y); 
+          };
+        ctx.stroke();
     };
     
     
